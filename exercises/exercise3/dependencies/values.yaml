@@ -1,0 +1,30 @@
+grafana:
+  config:
+    useGrafanaIniFile: true
+    grafanaIniSecret: 'grafana-config'
+  dashboardsProvider:
+    enabled: true
+  dashboardsConfigMaps:
+    - configMapName: 'cm-grafana-dashboards'
+      fileName: 'dashboard.json'
+  datasources:
+    secretName: 'grafana-config'
+
+influxdb:
+  auth:
+    admin:
+      username: 'influx'
+      password: 'influxdbpassword'
+      token: 'tokenStringForInfluxDB'
+
+rabbitmq:
+  auth:
+    username: 'guest'
+    password: 'guest'
+    erlangCookie: 'CfRrIxhHEZk0XUh9LdwDJTWa6woVEush'
+  extraConfiguration: |-
+    default_vhost = default-vhost
+    default_permissions.configure = .*
+    default_permissions.read = .*
+    default_permissions.write = .*
+

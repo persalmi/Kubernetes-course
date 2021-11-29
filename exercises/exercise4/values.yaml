@@ -1,0 +1,103 @@
+# vim: set foldmethod=marker:
+# Default values for exercise4.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+############################     <Dependencies>     ############################{{{
+grafana:
+  config:
+    useGrafanaIniFile: true
+    grafanaIniSecret: 'grafana-config'
+  dashboardsProvider:
+    enabled: true
+  dashboardsConfigMaps:
+    - configMapName: 'cm-grafana-dashboards'
+      fileName: 'dashboard.json'
+  datasources:
+    secretName: 'grafana-config'
+
+influxdb:
+  containerPorts:
+    http: 8086
+  auth:
+    admin:
+      username: 'influx'
+      password: 'influxdbpassword'
+      token: 'tokenStringForInfluxDB'
+
+rabbitmq:
+  auth:
+    username: 'guest'
+    password: 'guest'
+    erlangCookie: 'CfRrIxhHEZk0XUh9LdwDJTWa6woVEush'
+  extraConfiguration: |-
+    default_vhost = default-vhost
+    default_permissions.configure = .*
+    default_permissions.read = .*
+    default_permissions.write = .*
+##########################     </Dependendencies>     ##########################}}}
+
+##############################     <Consumer>     ##############################{{{
+consumer:
+
+  config:
+    configMapName: config
+    configMountPath: "/config"
+    readOnly: true
+  env:
+    - name: RABBITMQ_USERNAME
+      value: "guest"
+    - name: RABBITMQ_PASSWORD
+      value: "guest"
+    - name: CONFIG_PATH
+      value: "/config"
+    - name: PYTHONUNBUFFERED
+      value: "1"
+  fullnameOverride: ""
+  image:
+    repository: # TODO
+    pullPolicy: IfNotPresent
+    tag: ""
+  imagePullPolicy: IfNotPresent
+  nameOverride: ""
+  podAnnotations: {}
+  replicaCount: 1
+  resources:
+    requests:
+      cpu: 200m
+      memory: 128Mi
+    limits:
+      cpu: 200m
+      memory: 128Mi
+  restartPolicy: Always
+#############################     </Consumer>     #############################}}}
+
+##############################     <Producer>     ##############################{{{
+producer:
+  env:
+    - name: RABBITMQ_USERNAME
+      value: "guest"
+    - name: RABBITMQ_PASSWORD
+      value: "guest"
+    - name: SIGNAL_TYPE
+      value: "sine"
+    - name: RABBITMQ_VHOST
+      value: "default-vhost"
+  fullnameOverride: ""
+  image:
+    repository: # TODO
+    pullPolicy: IfNotPresent
+    tag: ""
+  imagePullPolicy: IfNotPresent
+  nameOverride: ""
+  podAnnotations: {}
+  replicaCount: 1
+  resources:
+    requests:
+      cpu: 200m
+      memory: 128Mi
+    limits:
+      cpu: 200m
+      memory: 128Mi
+  restartPolicy: Always
+#############################     </Producer>     #############################}}}
