@@ -32,7 +32,7 @@ rabbitmq:
     password: 'guest'
     erlangCookie: 'CfRrIxhHEZk0XUh9LdwDJTWa6woVEush'
   extraConfiguration: |-
-    default_vhost = default-vhost
+    default_vhost = /
     default_permissions.configure = .*
     default_permissions.read = .*
     default_permissions.write = .*
