@@ -1,4 +1,7 @@
 grafana:
+  global:
+    imagePullSecrets:
+      - dockerhub-credentials
   config:
     useGrafanaIniFile: true
     grafanaIniSecret: 'grafana-config'
@@ -11,6 +14,9 @@ grafana:
     secretName: 'grafana-config'
 
 influxdb:
+  global:
+    imagePullSecrets:
+      - dockerhub-credentials
   auth:
     admin:
       username: 'influx'
@@ -18,6 +24,9 @@ influxdb:
       token: 'tokenStringForInfluxDB'
 
 rabbitmq:
+  global:
+    imagePullSecrets:
+      - dockerhub-credentials
   auth:
     username: 'guest'
     password: 'guest'
