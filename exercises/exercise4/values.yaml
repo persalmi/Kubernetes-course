@@ -3,40 +3,6 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-############################     <Dependencies>     ############################{{{
-grafana:
-  config:
-    useGrafanaIniFile: true
-    grafanaIniSecret: 'grafana-config'
-  dashboardsProvider:
-    enabled: true
-  dashboardsConfigMaps:
-    - configMapName: 'cm-grafana-dashboards'
-      fileName: 'dashboard.json'
-  datasources:
-    secretName: 'grafana-config'
-
-influxdb:
-  containerPorts:
-    http: 8086
-  auth:
-    admin:
-      username: 'influx'
-      password: 'influxdbpassword'
-      token: 'tokenStringForInfluxDB'
-
-rabbitmq:
-  auth:
-    username: 'guest'
-    password: 'guest'
-    erlangCookie: 'CfRrIxhHEZk0XUh9LdwDJTWa6woVEush'
-  extraConfiguration: |-
-    default_vhost = /
-    default_permissions.configure = .*
-    default_permissions.read = .*
-    default_permissions.write = .*
-##########################     </Dependendencies>     ##########################}}}
-
 ##############################     <Consumer>     ##############################{{{
 consumer:
 
