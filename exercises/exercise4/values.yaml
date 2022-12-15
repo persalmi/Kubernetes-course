@@ -5,7 +5,6 @@
 
 ##############################     <Consumer>     ##############################{{{
 consumer:
-
   config:
     configMapName: config
     configMountPath: "/config"
