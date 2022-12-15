@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: producer
+  name: producer
+spec:
+  replicas: {{ .Values.producer.replicaCount }}
+  selector:
+    matchLabels:
+      app: producer
+  template:
+    metadata:
+      labels:
+        app: producer
+    spec:
+      containers:
+      - image: {{ .Values.producer.image.repository }}:{{ .Values.producer.image.tag }}
+        name: producer
+        resources:
+          requests:
+            cpu: 1
+        envFrom:
+        - configMapRef:
+            name: producer-config

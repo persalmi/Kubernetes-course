@@ -1,0 +1,8 @@
+apiVersion: v1
+data:
+  RABBITMQ_HOST: "exercise-rabbitmq"
+  SIGNAL_SAMPLE_INTERVAL: {{ quote (index .Values.producer.env 3).value }}
+kind: ConfigMap
+metadata:
+  name: producer-config
+  namespace: primer

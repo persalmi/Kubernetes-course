@@ -1,0 +1,11 @@
+apiVersion: v1
+data:
+  RABBITMQ_URL: exercise-rabbitmq
+  PYTHONUNBUFFERED: {{ quote (index .Values.consumer.env 3).value }}
+  INFLUXDB_ENABLE: "true"
+  INFLUXDB_URL: "exercise-influxdb"
+  CONFIG_PATH: "{{ .Values.consumer.config.configMountPath }}"
+kind: ConfigMap
+metadata:
+  name: consumer-config
+  namespace: primer

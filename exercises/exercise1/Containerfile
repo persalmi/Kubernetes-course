@@ -1,0 +1,15 @@
+FROM docker.io/golang:latest AS builder
+WORKDIR /go/src
+COPY ./go.mod .
+COPY ./go.sum .
+COPY ./main.go .
+RUN go build
+
+FROM docker.io/golang:latest
+WORKDIR /app
+COPY --from=builder /go/src/producer .
+ENV SIGNAL_TYPE=sine
+ENV SIGNAL_SAMPLE_INTERVAL=0.2
+ENV RABBITMQ_USERNAME=guest
+ENV RABBITMQ_PASSWORD=guest
+ENTRYPOINT ["/app/producer"]

@@ -4,7 +4,7 @@
 This application will publish samples from a signal and publish the values as
 messages on a RabbitMQ message broker.
 
-1. Create a Containerfile, build it and tag it `producer`
+1. Create a Containerfile, build it and tag it `localhost:1234/producer:1`
 2. Create a network called `coursenet`
 3. Start RabbitMQ container
     * Use latest image with management plugin from Docker Hub

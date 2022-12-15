@@ -6,7 +6,7 @@
 ##############################     <Consumer>     ##############################{{{
 consumer:
   config:
-    configMapName: config
+    configMapName: consumer-conf-file
     configMountPath: "/config"
     readOnly: true
   env:
@@ -20,9 +20,9 @@ consumer:
       value: "1"
   fullnameOverride: ""
   image:
-    repository: # TODO
+    repository: primer:1234/consumer
     pullPolicy: IfNotPresent
-    tag: ""
+    tag: "1"
   imagePullPolicy: IfNotPresent
   nameOverride: ""
   podAnnotations: {}
@@ -46,15 +46,17 @@ producer:
       value: "guest"
     - name: SIGNAL_TYPE
       value: "sine"
+    - name: SIGNAL_SAMPLE_INTERVAL
+      value: "0.2s"
   fullnameOverride: ""
   image:
-    repository: # TODO
+    repository: primer:1234/producer
     pullPolicy: IfNotPresent
-    tag: ""
+    tag: "2"
   imagePullPolicy: IfNotPresent
   nameOverride: ""
   podAnnotations: {}
-  replicaCount: 1
+  replicaCount: 3
   resources:
     requests:
       cpu: 200m

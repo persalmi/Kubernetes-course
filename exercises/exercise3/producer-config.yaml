@@ -1,0 +1,10 @@
+apiVersion: v1
+data:
+  RABBITMQ_HOST: exercise-rabbitmq
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2022-12-14T14:45:05Z"
+  name: producer-config
+  namespace: primer
+  resourceVersion: "10981"
+  uid: b5fb09b1-a00a-4924-80e1-ba41a254ddae
